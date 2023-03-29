@@ -1,4 +1,5 @@
 #include <emmintrin.h>
+#include <math.h>
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include <stdlib.h>

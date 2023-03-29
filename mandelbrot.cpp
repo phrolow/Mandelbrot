@@ -1,6 +1,6 @@
 #include "Mandelbrot.hpp"
 
-void render(matrix_t *matrix) {
+void render(sf::Uint8 *matrix) {
     float R2 = R * R;
 
     float X0, Y0, X, Y, X2, Y2, XY;
@@ -8,8 +8,10 @@ void render(matrix_t *matrix) {
     int x_range = WIDTH  / 2;
     int y_range = HEIGHT / 2;
 
-    for(int x = -x_range; x <= x_range; x++) {
-        for(int y = -y_range; y <= y_range; y++) {
+    size_t matrix_counter = 0;
+
+    for(int y = -y_range; y <= y_range; y++) {
+        for(int x = -x_range; x <= x_range; x++) {
             X0 = x * XSCALE;
             Y0 = y * YSCALE;
 
@@ -28,13 +30,14 @@ void render(matrix_t *matrix) {
 
                 if(X2 + Y2 > R2)
                     break;
-
-                printf("anton\n");
             }
 
-            (*matrix)[x + x_range][y + y_range] = n - 1;
-            printf("%d\n", n);
+            matrix[4 * matrix_counter]     = 144;
+            matrix[4 * matrix_counter + 1] = 255 - n;
+            matrix[4 * matrix_counter + 2] = 255;
+            matrix[4 * matrix_counter + 3] = !!n * 255;
+
+            matrix_counter++;
         }
     }
 }
-

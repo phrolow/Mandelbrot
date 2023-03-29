@@ -1,4 +1,5 @@
 #include <emmintrin.h>
+#include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,8 +15,6 @@ const float R = 10.0;
 const float XSCALE = X_MAX / WIDTH;
 const float YSCALE = Y_MAX / HEIGHT;
 
-typedef int matrix_t[HEIGHT + 1][WIDTH + 1];
+void display(sf::Uint8 *matrix);
 
-void display(matrix_t *matrix);
-
-void render(matrix_t *matrix);
+void render(sf::Uint8 *matrix);

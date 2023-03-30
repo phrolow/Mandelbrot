@@ -1,7 +1,10 @@
 #include "Mandelbrot.hpp"
 
-void render(sf::Uint8 *matrix) {
+void render(sf::Uint8 *matrix, const float x_max, const float y_max) {
     float R2 = R * R;
+    
+    float x_scale = x_max / WIDTH;
+    float y_scale = y_max / HEIGHT;
 
     float X0, Y0, X, Y, X2, Y2, XY;
 
@@ -12,8 +15,8 @@ void render(sf::Uint8 *matrix) {
 
     for(int y = -y_range; y <= y_range; y++) {
         for(int x = -x_range; x <= x_range; x++) {
-            X0 = x * XSCALE;
-            Y0 = y * YSCALE;
+            X0 = x * x_scale;
+            Y0 = y * y_scale;
 
             X = X0;
             Y = Y0;

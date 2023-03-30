@@ -1,9 +1,13 @@
 #include "Mandelbrot.hpp"
 
 int main() {
+    float x_max = X_MAX_DEFAULT;
+    float y_max = Y_MAX_DEFAULT;
+    float scale = 1.f;
+
     sf::Uint8* matrix = new sf::Uint8[(WIDTH + 1) * (HEIGHT + 1) * 4];
 
-    render(matrix);
+    render(matrix, scale * x_max, scale * y_max);
 
     sf::RenderWindow window(sf::VideoMode(WIDTH + 1, HEIGHT + 1), "Mandelbrot");
 
@@ -46,23 +50,27 @@ int main() {
             else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code)
                 {
-                case sf::Keyboard::F:
-                    //render(matrix);
-                    //fractal.update(matrix);
+                case sf::Keyboard::Num1:
+                    scale *= 0.1f;
 
                     break;
                 
+                case sf::Keyboard::Num2:
+                    scale *= 10.f;
+
+                    break;
+
                 default:
                     break;
                 }
             }
         }
 
-        render(matrix);
+        render(matrix, scale * x_max, scale * y_max);
         fractal.update(matrix);
 
         currentTime = clock.getElapsedTime();
-        fps = 1.0f / (currentTime.asSeconds() - previousTime.asSeconds()); 
+        fps = 1.f / (currentTime.asSeconds() - previousTime.asSeconds()); 
         previousTime = currentTime;
 
         sprintf(label, "FPS %.1f", fps);

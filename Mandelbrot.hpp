@@ -16,6 +16,8 @@ const float R = 10.0;
 const float XSCALE = X_MAX / WIDTH;
 const float YSCALE = Y_MAX / HEIGHT;
 
+const int textSize = 24;
+
 void display(sf::Uint8 *matrix);
 
 void render(sf::Uint8 *matrix);

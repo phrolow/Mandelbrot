@@ -18,7 +18,21 @@ int main() {
     float fps = NAN;
     sf::Clock clock = sf::Clock();
     sf::Time previousTime;
+    previousTime = clock.getElapsedTime();
     sf::Time currentTime;
+
+    sf::Font font;
+    if(!font.loadFromFile("impact.ttf")) {
+        printf("Font not found!\n");
+    }
+
+    char label[12] = {};
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(label);
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::Black);
 
     while (window.isOpen())
     {
@@ -33,15 +47,8 @@ int main() {
                 switch (event.key.code)
                 {
                 case sf::Keyboard::F:
-                    previousTime = clock.getElapsedTime();
-
-                    render(matrix);
-                    fractal.update(matrix);
-
-                    currentTime = clock.getElapsedTime();
-                    fps = 1.0f / (currentTime.asSeconds() - previousTime.asSeconds()); 
-                    printf("%g\n", fps); 
-                    previousTime = currentTime;
+                    //render(matrix);
+                    //fractal.update(matrix);
 
                     break;
                 
@@ -51,8 +58,19 @@ int main() {
             }
         }
 
+        render(matrix);
+        fractal.update(matrix);
+
+        currentTime = clock.getElapsedTime();
+        fps = 1.0f / (currentTime.asSeconds() - previousTime.asSeconds()); 
+        previousTime = currentTime;
+
+        sprintf(label, "FPS %.1f", fps);
+        text.setString(label);
+
         window.clear();
         window.draw(sprite);
+        window.draw(text);
         window.display();
     }
 

@@ -34,7 +34,7 @@ void render(sf::Uint8 *matrix) {
 
             matrix[4 * matrix_counter]     = 144;
             matrix[4 * matrix_counter + 1] = 255 - n;
-            matrix[4 * matrix_counter + 2] = 255;
+            matrix[4 * matrix_counter + 2] = abs(101 - n);
             matrix[4 * matrix_counter + 3] = !!n * 255;
 
             matrix_counter++;

@@ -17,4 +17,4 @@ const int textSize = 24;
 
 void display(sf::Uint8 *matrix);
 
-void render(sf::Uint8 *matrix, const float x_max, const float y_max);
+void render(sf::Uint8 *matrix, const float x_min, const float x_max, const float y_min, const float y_max);

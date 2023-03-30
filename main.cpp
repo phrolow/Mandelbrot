@@ -1,13 +1,15 @@
 #include "Mandelbrot.hpp"
 
 int main() {
-    float x_max = X_MAX_DEFAULT;
-    float y_max = Y_MAX_DEFAULT;
+    float x_min = - X_MAX_DEFAULT;
+    float x_max =   X_MAX_DEFAULT;
+    float y_min = - Y_MAX_DEFAULT;
+    float y_max =   Y_MAX_DEFAULT;
     float scale = 1.f;
 
     sf::Uint8* matrix = new sf::Uint8[(WIDTH + 1) * (HEIGHT + 1) * 4];
 
-    render(matrix, scale * x_max, scale * y_max);
+    render(matrix, scale * x_min, scale * x_max, scale * y_min, scale * y_max);
 
     sf::RenderWindow window(sf::VideoMode(WIDTH + 1, HEIGHT + 1), "Mandelbrot");
 
@@ -60,13 +62,37 @@ int main() {
 
                     break;
 
+                case sf::Keyboard::Up:
+                    y_min -= 1.f;
+                    y_max -= 1.f;
+
+                    break;
+                
+                case sf::Keyboard::Down:
+                    y_min += 1.f;
+                    y_max += 1.f;
+
+                    break;
+
+                case sf::Keyboard::Right:
+                    x_min += 1.f;
+                    x_max += 1.f;
+
+                    break;
+
+                case sf::Keyboard::Left:
+                    x_min -= 1.f;
+                    x_max -= 1.f;
+
+                    break;
+
                 default:
                     break;
                 }
             }
         }
 
-        render(matrix, scale * x_max, scale * y_max);
+        render(matrix, scale * x_min, scale * x_max, scale * y_min, scale * y_max);
         fractal.update(matrix);
 
         currentTime = clock.getElapsedTime();

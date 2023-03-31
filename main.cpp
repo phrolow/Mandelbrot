@@ -53,12 +53,12 @@ int main() {
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Num1:
-                    scale *= 0.1f;
+                    scale *= 0.5f;
 
                     break;
                 
                 case sf::Keyboard::Num2:
-                    scale *= 10.f;
+                    scale *= 2.f;
 
                     break;
 

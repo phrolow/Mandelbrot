@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const size_t HEIGHT = 600;
-const size_t WIDTH  = 600;
+const size_t HEIGHT = 599;
+const size_t WIDTH  = 599;
 
 const unsigned N_MAX = 256;
 

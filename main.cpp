@@ -108,5 +108,10 @@ int main() {
         window.display();
     }
 
+    __m128 test = _mm_cmple_ps(_mm_set1_ps(0), _mm_set1_ps(1));
+    __m128i wtf = _mm_cvtps_epi32(_mm_and_ps(test, _mm_set_ps1(1)));
+
+    printf("%x", *(&wtf));
+
     return 0;
 }

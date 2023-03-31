@@ -33,11 +33,13 @@ void render(sf::Uint8 *matrix, const float x_min, const float x_max, const float
             X = X0;
             Y = Y0;
 
-            int n = 0;
+            union 
+            {
+                __m128i N = _mm_set1_epi32(0);
+                int n_int_array[4];
+            };
 
-            __m128i N = _mm_set1_epi32(0);
-
-            for(; n < N_MAX; n++) {
+            for(int n = 0; n < N_MAX; n++) {
                 //X2 = X * X;
                 //Y2 = Y * Y;
                 //XY = X * Y;
@@ -71,12 +73,12 @@ void render(sf::Uint8 *matrix, const float x_min, const float x_max, const float
             }
             
             for(int i = 0; i < 4; i++) {
-                matrix[4 * matrix_counter]     = 144;
-                matrix[4 * matrix_counter + 1] = 255 - N[i];
-                matrix[4 * matrix_counter + 2] = abs(101 - N[i]);
-                matrix[4 * matrix_counter + 3] = !!(N[i]) * 255;
+                matrix[matrix_counter]     = 144;
+                matrix[matrix_counter + 1] = 255 - n_int_array[i];
+                matrix[matrix_counter + 2] = abs(101 - n_int_array[i]);
+                matrix[matrix_counter + 3] = !!(n_int_array[i]) * 255;
 
-                matrix_counter++;
+                matrix_counter += 4;
             }
         }
     }

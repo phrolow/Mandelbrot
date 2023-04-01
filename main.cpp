@@ -5,7 +5,7 @@ int main() {
     float x_max =   X_MAX_DEFAULT;
     float y_min = - Y_MAX_DEFAULT;
     float y_max =   Y_MAX_DEFAULT;
-    float scale = 1.f;
+    float scale = 0.125f;
 
     sf::Uint8* matrix = new sf::Uint8[WIDTH * HEIGHT * 4];
 

@@ -4,14 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const size_t HEIGHT = 600;
-const size_t WIDTH  = 600;
+const size_t HEIGHT = 800;
+const size_t WIDTH  = 800;
 
 const unsigned N_MAX = 256;
 
 const float SCALE_STEP = 0.5f;
-const float X_MAX_DEFAULT = 3.0;
-const float Y_MAX_DEFAULT = 3.0;
+const float X_MAX_DEFAULT = 3.0f;
+const float Y_MAX_DEFAULT = 3.0f;
 const float R = 10.0;
 
 const int textSize = 24;

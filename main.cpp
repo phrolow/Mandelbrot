@@ -7,25 +7,17 @@ int main() {
     float y_max =   Y_MAX_DEFAULT;
     float scale = 1.f;
 
-    sf::Uint8* matrix = new sf::Uint8[(WIDTH + 1) * (HEIGHT + 1) * 4];
+    sf::Uint8* matrix = new sf::Uint8[WIDTH * HEIGHT * 4];
 
     render(matrix, scale * x_min, scale * x_max, scale * y_min, scale * y_max);
 
-    sf::RenderWindow window(sf::VideoMode(WIDTH + 1, HEIGHT + 1), "Mandelbrot");
-
-    window.setFramerateLimit(60);
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Mandelbrot");
 
     sf::Texture fractal;
-    fractal.create(WIDTH + 1, HEIGHT + 1);
+    fractal.create(WIDTH, HEIGHT);
     fractal.update(matrix);
 
     sf::Sprite sprite(fractal);
-
-    float fps = NAN;
-    sf::Clock clock = sf::Clock();
-    sf::Time previousTime;
-    previousTime = clock.getElapsedTime();
-    sf::Time currentTime;
 
     sf::Font font;
     if(!font.loadFromFile("impact.ttf")) {
@@ -40,6 +32,12 @@ int main() {
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::Black);
 
+    float fps = NAN;
+    sf::Clock clock = sf::Clock();
+    sf::Time previousTime;
+    previousTime = clock.getElapsedTime();
+    sf::Time currentTime;
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -53,36 +51,36 @@ int main() {
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Num1:
-                    scale *= 0.5f;
+                    scale *= SCALE_STEP;
 
                     break;
                 
                 case sf::Keyboard::Num2:
-                    scale *= 2.f;
+                    scale *= (1 / SCALE_STEP);
 
                     break;
 
                 case sf::Keyboard::Up:
-                    y_min -= 1.f;
-                    y_max -= 1.f;
+                    y_min -= scale;
+                    y_max -= scale;
 
                     break;
                 
                 case sf::Keyboard::Down:
-                    y_min += 1.f;
-                    y_max += 1.f;
+                    y_min += scale;
+                    y_max += scale;
 
                     break;
 
                 case sf::Keyboard::Right:
-                    x_min += 1.f;
-                    x_max += 1.f;
+                    x_min += scale;
+                    x_max += scale;
 
                     break;
 
                 case sf::Keyboard::Left:
-                    x_min -= 1.f;
-                    x_max -= 1.f;
+                    x_min -= scale;
+                    x_max -= scale;
 
                     break;
 
@@ -92,7 +90,11 @@ int main() {
             }
         }
 
-        render(matrix, scale * x_min, scale * x_max, scale * y_min, scale * y_max);
+        render (matrix, 
+                x_min + (x_max - x_min) * (0.5f - scale), 
+                x_max - (x_max - x_min) * (0.5f - scale), 
+                y_min + (y_max - y_min) * (0.5f - scale), 
+                y_max - (y_max - y_min) * (0.5f - scale));
         fractal.update(matrix);
 
         currentTime = clock.getElapsedTime();

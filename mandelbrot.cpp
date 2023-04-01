@@ -10,7 +10,7 @@ void render(sf::Uint8 *matrix, const float x_min, const float x_max, const float
     __m256 X_SCALE = _mm256_set1_ps(x_scale);
     __m256 Y_SCALE = _mm256_set1_ps(y_scale);
 
-    __m256 X_SCALE_X4 = _mm256_mul_ps(_mm256_set1_ps(8.f), X_SCALE);
+    __m256 X_SCALE_X8 = _mm256_mul_ps(_mm256_set1_ps(8.f), X_SCALE);
 
     __m256 GRADATION = _mm256_set_ps(7.f, 6.f, 5.f, 4.f, 3.f, 2.f, 1.f, 0.f);
 
@@ -21,10 +21,10 @@ void render(sf::Uint8 *matrix, const float x_min, const float x_max, const float
 
     size_t matrix_counter = 0;
 
-    for(int y = 0; y <= HEIGHT; y++, Y0 = _mm256_add_ps(Y0, Y_SCALE)) {
+    for(int y = 1; y <= HEIGHT; y++, Y0 = _mm256_add_ps(Y0, Y_SCALE)) {
         X0 = X_MIN;
 
-        for(int x = 0; x <= WIDTH / 8; x++, X0 = _mm256_add_ps(X0, X_SCALE_X4)) {
+        for(int x = 1; x <= WIDTH / 8; x++, X0 = _mm256_add_ps(X0, X_SCALE_X8)) {
             X = X0;
             Y = Y0;
 

@@ -4,11 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const size_t HEIGHT = 599;
-const size_t WIDTH  = 599;
+const size_t HEIGHT = 600;
+const size_t WIDTH  = 600;
 
 const unsigned N_MAX = 256;
 
+const float SCALE_STEP = 0.5f;
 const float X_MAX_DEFAULT = 3.0;
 const float Y_MAX_DEFAULT = 3.0;
 const float R = 10.0;
